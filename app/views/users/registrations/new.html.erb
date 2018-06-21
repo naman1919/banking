@@ -1,0 +1,219 @@
+<h2>Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:class => "form-horizontal center"}) do |f| %>
+  <%= devise_error_messages! %>
+  <div class="field form-group">
+    <%= f.label :First_Name, class: "col-md-4 control-label" %>
+    <div class="col-md-8">
+      <%= f.text_field :first_name, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :Last_Name, class: "col-md-4 control-label" %>
+    <div class="col-md-8">
+      <%= f.text_field :last_name, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :Father_Name, class: "col-md-4 control-labels" %>
+    <div class="col-md-8">
+      <%= f.text_field :father_name, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :Mother_Name, class: "col-md-4 control-labels" %>
+    <div class="col-md-8">
+      <%= f.text_field :mother_name, class: "form-control" %>
+    </div>
+  </div>
+  
+  <div class="field form-group">
+    <%= f.label :Occupation, class: "col-md-4 control-labels" %>
+    <div class="col-md-8">
+      <%= f.text_field :occupation, class: "form-control" %>
+    </div>
+  </div>
+  
+  <div class="field form-group">
+    <%= f.label :Father_Occupation, class: "col-md-4 control-labels" %>
+    <div class="col-md-8">
+      <%= f.text_field :father_occupation, class: "form-control" %>
+    </div>
+  </div>
+ 
+  <div class="field form-group">
+    <%= f.label :Mother_Occupation, class: "col-md-4 control-labels" %>
+    <div class="col-md-8">
+      <%= f.text_field :mother_occupation, class: "form-control" %>
+    </div>
+  </div>
+  <br />
+
+  <div class="field form-group">
+    <%= f.label :Select_Bank, class: "col-md-4 control-labels" %>
+    <div class="col-md-8">
+      <%= f.collection_select(:bank_id, Bank.all, :id, :name, :include_blank => "Please select bank") %>
+    </div>
+  </div>
+  <br />
+
+  <div class="field form-group">
+    <%= f.label :Mobile_Number, class: "col-md-4 control-labels" %>
+    <div class="col-md-8">
+      <%= f.text_field :mobile_no, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :email, class: "col-md-4 control-labels" %>
+    <div class="col-md-8">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :password, class: "col-md-4 control-labels" %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %>
+    <div class="col-md-8">
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
+  </div>
+  
+  <div class="field form-group">
+    <%= f.label :Social_Security_Number, class: "col-md-4 control-labels" %>
+    <div class="col-md-8">
+      <%= f.text_field :social_security_no, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :PAN, class: "col-md-4 control-labels" %>
+    <div class="col-md-8">
+      <%= f.text_field :pan, class: "form-control" %>
+    </div>
+  </div>
+  
+  <br /> 
+
+  <div class="field form-group">
+    <%= f.label :Attach_Document, class: "col-md-4 control-labels" %>
+    <div class="col-md-8">
+      <%= f.file_field :document %><br />
+    </div>
+  </div>
+  <br />
+
+  <div class="field form-group">
+    <%= f.label :Attach_Your_Photo, class: "col-md-4 control-labels" %>
+    <div class="col-md-8">
+      <%= f.file_field :user_photo%><br />
+    </div>
+  </div>
+  <br />
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <%= f.fields_for :local_address, LocalAddress.new do |lform| %>
+  <hr>
+  <h5><b>Local Address</b></h5>
+    <div class="field">
+      <%= lform.label :House_No,"House Number/Name" %><br />
+      <%= lform.text_field :house_no %>
+    </div>
+
+    <div class="field">
+      <%= lform.label :Stree_No,"Street Number" %><br />
+      <%= lform.text_field :street_no %>
+    </div>
+
+    <div class="field">
+      <%= lform.label :Area,"Area" %><br />
+      <%= lform.text_field :area %>
+    </div>
+
+    <div class="field">
+      <%= lform.label :city,"City" %><br />
+      <%= lform.text_field :city %>
+    </div>
+
+    <div class="field">
+      <%= lform.label :state,"State" %><br />
+      <%= lform.text_field :state %>
+    </div>
+
+    <div class="field">
+      <%= lform.label :country,"Country" %><br />
+      <%= lform.text_field :country %>
+    </div>
+
+    <div class="field">
+      <%= lform.label :PIN,"PIN:" %><br />
+      <%= lform.text_field :pin %>
+    </div>
+
+    <div class="field">
+      <%= lform.label :address_proof, "Address Proof" %><br />
+      <%= lform.text_field :address_proof %>
+    </div>
+
+  <% end %>
+  
+  <%= f.fields_for :permanent_address,PermanentAddress.new do |pform| %>
+  <hr>
+  <h5><b>Permanent Address</b></h5>
+    <div class="field">
+      <%= pform.label :House_No, "House Number/Name" %><br />
+      <%= pform.text_field :house_no %>
+    </div>
+
+    <div class="field">
+      <%= pform.label :Stree_No,"Street Number" %><br />
+      <%= pform.text_field :street_no %>
+    </div>
+
+    <div class="field">
+      <%= pform.label :Area,"Area" %><br />
+      <%= pform.text_field :area %>
+    </div>
+
+    <div class="field">
+      <%= pform.label :city,"City" %><br />
+      <%= pform.text_field :city %>
+    </div>
+
+    <div class="field">
+      <%= pform.label :state,"State" %><br />
+      <%= pform.text_field :state %>
+    </div>
+
+    <div class="field">
+      <%= pform.label :country,"Country" %><br />
+      <%= pform.text_field :country %>
+    </div>
+
+    <div class="field">
+      <%= pform.label :PIN,"PIN:" %><br />
+      <%= pform.text_field :pin %>
+    </div>
+
+    <div class="field">
+      <%= pform.label :address_proof,"Address Proof" %><br />
+      <%= pform.text_field :address_proof %>
+    </div>
+
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "users/shared/links" %>
