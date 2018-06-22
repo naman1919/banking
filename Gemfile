@@ -18,6 +18,8 @@ gem 'therubyracer'
 gem 'carrierwave'
 gem 'devise'
 gem 'rolify'
+gem 'cancancan'
+gem 'mini_magick'
 
 gem 'bootstrap'
 gem 'jquery-rails'

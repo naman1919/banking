@@ -1,1 +1,54 @@
-<h1>Welcome <%= current_user.first_name %></h1>
+<% if current_user.has_role? :user %>
+
+  <h1><strong>Hello <%= current_user.first_name %>!</strong></h1>
+
+  <p>Welcome to Banking System,</p>
+  <p>Your account created successfully</p>
+  <p>You recieve an confirmation email once your information gets verified and then you will be able to access your account</p>
+
+  <p>Thanks for joining us, Have a great day!</p>
+<% end %>
+
+<% if current_user.has_role? :admin %>
+  <h1><strong>Hello Admin</strong></h1>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Occupation</th>
+        <th>Father's Name</th>
+        <th>Mother's Name</th>
+        <th>Father's Occupation</th>
+        <th>Mother's Occupation</th>
+        <th>Mobile Number</th>
+        <th>Bank Name</th>
+        <th>PAN</th>
+        <th>Social Security Number</th>
+        <th>Document Proof</th>
+        <th>User Profile</th>
+      </tr>
+    </thead>
+
+    <tbody>
+    <% User.all.each do |user| %>
+      <tr>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.father_name %></td>
+        <td><%= user.occupation %></td>
+        <td><%= user.mother_name %></td>
+        <td><%= user.father_occupation %></td>
+        <td><%= user.mother_occupation %></td>
+        <td><%= user.mobile_no %></td>
+        <td><%= user.bank.name %></td>
+        <td><%= user.pan %></td>
+        <td><%= user.social_security_no %></td>
+        <td><%= image_tag(user.document_url(:thumb)) %></td>
+        <td><%= link_to "Click to view", user_detail_path(user) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+<% end %>
+
