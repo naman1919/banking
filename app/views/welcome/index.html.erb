@@ -18,16 +18,11 @@
         <th>First Name</th>
         <th>Last Name</th>
         <th>Occupation</th>
-        <th>Father's Name</th>
-        <th>Mother's Name</th>
-        <th>Father's Occupation</th>
-        <th>Mother's Occupation</th>
         <th>Mobile Number</th>
         <th>Bank Name</th>
         <th>PAN</th>
         <th>Social Security Number</th>
-        <th>Document Proof</th>
-        <th>User Profile</th>
+        <th>Status</th>
       </tr>
     </thead>
 
@@ -36,17 +31,17 @@
       <tr>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
-        <td><%= user.father_name %></td>
         <td><%= user.occupation %></td>
-        <td><%= user.mother_name %></td>
-        <td><%= user.father_occupation %></td>
-        <td><%= user.mother_occupation %></td>
         <td><%= user.mobile_no %></td>
         <td><%= user.bank.name %></td>
         <td><%= user.pan %></td>
         <td><%= user.social_security_no %></td>
-        <td><%= image_tag(user.document_url(:thumb)) %></td>
-        <td><%= link_to "Click to view", user_detail_path(user) %></td>
+        <% if user.verify %>
+          <td>Verified</td>
+        <% else %>
+          <td>Not Verified</td>
+        <% end %>    
+        <td><%= link_to "Click to view", welcome_path(user) %></td>
       </tr>
     <% end %>
   </tbody>

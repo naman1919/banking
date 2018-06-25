@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_one :local_address, dependent: :destroy
   has_one :permanent_address, dependent: :destroy
 
+  has_one :account
+
   accepts_nested_attributes_for :local_address
   accepts_nested_attributes_for :permanent_address
 
@@ -21,5 +23,4 @@ class User < ApplicationRecord
   def assign_default_role
     self.add_role(:user) if self.roles.blank?
   end
-
 end

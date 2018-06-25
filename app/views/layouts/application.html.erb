@@ -13,6 +13,13 @@
     <% if user_signed_in? %>
       <%= link_to 'Edit profile', edit_user_registration_path %> 
       <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+      <% if(current_user.has_role?(:user) && current_user.verify) %>
+        <%= link_to "Add beneficiary", '#'  %>
+        <%= link_to "Fund Transfer", '#'  %>
+        <%= link_to 'Transactions', '#' %>
+      <% end %>
+      <%= link_to 'Create Manager', '#' if current_user.has_role? :admin %>
+      <%= link_to 'All Manager', '#' if current_user.has_role? :admin %>
       <%= link_to "All Users", welcome_index_path if current_user.has_role? :admin %>
     <% else %>
       <%= link_to "Sign up", new_user_registration_path %> 
