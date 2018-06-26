@@ -1,0 +1,12 @@
+<%= form_with model: @transaction do |form| %>
+
+  <!-- <p class="notice"><%= notice %></p> -->
+
+  <%= form.label :to_account_no, "To Account Number-" %>
+  <%= form.text_field :to_account_no %><br />
+
+  <%= form.label :amount, "Amount to transfer" %>
+  <%= form.text_field :amount %>
+
+  <%= form.submit "credit", class: "btn btn-success" %>
+<% end %>

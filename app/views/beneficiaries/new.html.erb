@@ -1,0 +1,11 @@
+<%= form_with model: @beneficiary do |form| %>
+
+  <!-- <p class="notice"><%= notice %></p> -->
+  <%= form.label :account_no, "Account Number" %>
+  <%= form.text_field :account_no %><br />
+
+  <%= form.label :name, "Name" %>
+  <%= form.text_field :name %><br />
+
+  <%= form.submit %>
+<% end %>

@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   # get 'welcome/index'
   # get 'user_details/:id' => 'user_details#show', as: 'user_detail'
   resources :welcome, only: [:index, :show]
+  
+  resources :beneficiaries
 
+  resources :transactions
   resources :users, only: [:create] do
     get 'verify',on: :member
   end

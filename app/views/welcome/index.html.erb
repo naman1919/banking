@@ -1,4 +1,4 @@
-<% if current_user.has_role? :user %>
+<% if(current_user.has_role?(:user) && !current_user.verify) %>
 
   <h1><strong>Hello <%= current_user.first_name %>!</strong></h1>
 

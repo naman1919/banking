@@ -1,6 +1,7 @@
 <h1>Welcome:<%= @user.first_name %></h1>
 
 <p>Welcome to Banking System, Your information is verified now You can access your account</p>
+<h4><b>Your Account Number :<%= @user.account.account_no %></b></h4>
 
 <p>Thanks for joining us, Have a great day!</p>
 <p>Login to bankingsystem.com-<%= link_to "bankingonline.in", new_user_session_url %></p>

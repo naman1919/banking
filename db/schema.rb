@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_25_124255) do
+ActiveRecord::Schema.define(version: 2018_06_26_141715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2018_06_25_124255) do
     t.datetime "updated_at", null: false
     t.string "account_no"
     t.integer "user_id"
+    t.bigint "balance"
   end
 
   create_table "addresses", force: :cascade do |t|
@@ -45,6 +46,18 @@ ActiveRecord::Schema.define(version: 2018_06_25_124255) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "beneficiaries", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "account_no"
+  end
+
+  create_table "beneficiaries_users", id: false, force: :cascade do |t|
+    t.integer "beneficiary_id"
+    t.integer "user_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -53,6 +66,17 @@ ActiveRecord::Schema.define(version: 2018_06_25_124255) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.string "from_account_no"
+    t.boolean "credit"
+    t.boolean "debit"
+    t.string "to_account_no"
+    t.integer "amount"
   end
 
   create_table "users", force: :cascade do |t|

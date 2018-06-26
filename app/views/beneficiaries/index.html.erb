@@ -1,0 +1,13 @@
+<table class="table table-strip">
+  <tr>
+    <th>Account Number</th>
+    <th>Name</th>
+  </tr>
+  
+  <% @beneficiaries.each do |beneficiary| %>
+    <tr>
+      <td><%= beneficiary.account_no %></td>
+      <td><%= beneficiary.name %></td>
+    </tr>
+  <% end %>
+</table>

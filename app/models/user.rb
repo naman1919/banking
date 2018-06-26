@@ -13,14 +13,22 @@ class User < ApplicationRecord
   has_one :local_address, dependent: :destroy
   has_one :permanent_address, dependent: :destroy
 
-  has_one :account
+  has_one :account, dependent: :destroy
 
+  has_and_belongs_to_many :beneficiaries
+
+  has_many :transactions
+  
   accepts_nested_attributes_for :local_address
   accepts_nested_attributes_for :permanent_address
 
-  after_create :assign_default_role
+  after_create :assign_default_role, :generate_account_no
 
   def assign_default_role
     self.add_role(:user) if self.roles.blank?
+  end
+
+  def generate_account_no
+    Account.create!(account_no: (SecureRandom.random_number(9e11) + 1e11).to_i, user_id: self.id)
   end
 end

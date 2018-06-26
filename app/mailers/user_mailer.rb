@@ -7,4 +7,10 @@ class UserMailer < ApplicationMailer
     
     mail(to: @user.email, subject: "Welcome to Banking System")
   end
+
+  def beneficiary_added(user)
+    @user = user
+
+    mail(to: @user.email, subject: "Beneficiary Added Successfully")
+  end
 end
