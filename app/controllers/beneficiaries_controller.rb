@@ -12,13 +12,11 @@ class BeneficiariesController < ApplicationController
     account_no = params[:beneficiary].values[0]
     account = Account.find_by_account_no(account_no)
     
-    if account
-      if account.user.verify
-        Beneficiary.create(beneficiary_params)
-        current_user.beneficiaries << Beneficiary.last
-        UserMailer.beneficiary_added(current_user).deliver
-        redirect_to  beneficiaries_path
-      end
+    if account && account.user.verify
+      Beneficiary.create(beneficiary_params)
+      current_user.beneficiaries << Beneficiary.last
+      UserMailer.beneficiary_added(current_user).deliver
+      redirect_to  beneficiaries_path
     else
       redirect_to new_beneficiary_path
       flash[:notice] = "Please provide valid account number"

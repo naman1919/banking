@@ -1,0 +1,7 @@
+<p>Please verify your OTP which is sent to your given email id</p>
+
+<%= form_with do |form| %>
+  
+  <%= form.text_field :otp %>
+  <%= form.submit "Verify", class: "btn btn-warning" %>
+<% end %>

@@ -1,0 +1,26 @@
+<table class="table table-striped">
+  <tr>
+    <th>Amount</th>
+    <th>Date</th>
+    <th>Account Number</th>
+    <th>Transaction Type</th>
+  </tr>
+
+  <% @transactions.all.each do  |transaction| %>
+    <tr>
+      <td><%= transaction.amount %> Rs.</td>
+      <td><%= transaction.created_at.strftime("%m/%d/%Y") %></td>
+      <% if transaction.account_id == current_user.account.id %>
+        <td><%= transaction.user.account.account_no %></td>
+        <td>Credit</td>
+      <% else %>
+        <td><%= transaction.account.account_no %></td>
+        <td>Debit</td>
+      <% end %>
+    </tr>
+  <% end %>
+  <tr colspan="4"><b>Balance: <%= current_user.account.balance %></b></tr>
+</table>
+
+
+  

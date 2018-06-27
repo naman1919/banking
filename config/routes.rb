@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   
   resources :beneficiaries
 
-  resources :transactions
+  resources :transactions, only: [:index, :new, :create] do
+    get 'generate_otp',on: :member
+  end
+
   resources :users, only: [:create] do
     get 'verify',on: :member
   end
