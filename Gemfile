@@ -21,6 +21,10 @@ gem 'rolify'
 gem 'cancancan'
 gem 'mini_magick'
 
+gem 'prawn'
+gem 'responders'
+gem 'prawn-table'
+
 gem 'bootstrap'
 gem 'jquery-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes

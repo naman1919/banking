@@ -12,7 +12,7 @@ class BeneficiariesController < ApplicationController
     account_no = params[:beneficiary].values[0]
     account = Account.find_by_account_no(account_no)
     
-    if account && account.user.verify
+    if account && account.user.verify && account != current_user.account
       Beneficiary.create(beneficiary_params)
       current_user.beneficiaries << Beneficiary.last
       UserMailer.beneficiary_added(current_user).deliver

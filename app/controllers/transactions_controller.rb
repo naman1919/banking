@@ -5,7 +5,6 @@ class TransactionsController < ApplicationController
     @transactions_d = current_user.transactions
 
     @transactions = @transactions_c.or(@transactions_d).order("created_at")
-    #@transactions = Transaction.where(account_id: account_id or user_id: current_user.id)
   end
 
   def new
@@ -14,24 +13,39 @@ class TransactionsController < ApplicationController
 
   def create
     @account_no = params[:transaction].values[0]
-    @amount = params[:transaction].values[1]
-    @otp = params[:transaction].values[2]
+    amount = params[:transaction].values[1]
+    otp = params[:transaction].values[2]
 
-    @account1 = current_user.account
-    @account2 = Account.find_by_account_no(@account_no)
+    from_account = current_user.account
+    to_account = Account.find_by_account_no(@account_no)
     
-    if beneficiary_exist? && @account1.otp == @otp
-      @account2.update_columns(balance: (@account2.balance.to_i + @amount.to_i))
-      @account1.update_columns(balance: (@account1.balance.to_i - @amount.to_i), otp: nil)
-      Transaction.create!(account_id: @account2.id, user_id: current_user.id, amount: @amount)
+    if beneficiary_exist? && from_account.otp == otp
+      to_account.update_columns(balance: (to_account.balance.to_i + amount.to_i))
+      from_account.update_columns(balance: (from_account.balance.to_i - amount.to_i), otp: nil)
+      Transaction.create!(account_id: to_account.id, user_id: current_user.id, amount: amount)
       
-      TransactionMailer.amount_deducted(current_user, @amount).deliver
-      TransactionMailer.amount_credited(@account2.user, @amount).deliver
+      TransactionMailer.amount_deducted(current_user, amount).deliver
+      TransactionMailer.amount_credited(to_account.user, amount).deliver
 
       redirect_to transactions_path
     else
       flash[:notice] = "This account number does not exist in your beneficiary list or invalid otp"
       redirect_to new_transaction_path
+    end
+  end
+  
+  def download_mini_statement
+    index
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = TransactionPdf.new(@transactions, current_user)
+
+        send_data pdf.render,
+                  filename: "Ministatement_#{ current_user.first_name }.pdf",
+                  type: 'application/pdf',
+                  disposition: 'inline'
+      end
     end
   end
 
@@ -49,5 +63,4 @@ class TransactionsController < ApplicationController
   def beneficiary_exist?
     current_user.beneficiaries.where(account_no: @account_no).first
   end
-
 end

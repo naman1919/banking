@@ -10,9 +10,9 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse bg-light">
       <% if user_signed_in? %>
-        <%= link_to 'Edit profile', edit_user_registration_path %> 
+        <%= link_to 'Edit profile', edit_user_registration_path, class: "nav-link" %>
         <%= link_to "Logout", destroy_user_session_path, method: :delete %>
         <% if(current_user.has_role?(:user) && current_user.verify) %>
           <%= link_to "Add beneficiary", new_beneficiary_path  %>

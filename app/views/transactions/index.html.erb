@@ -22,5 +22,6 @@
   <tr colspan="4"><b>Balance: <%= current_user.account.balance %></b></tr>
 </table>
 
+<b><%= link_to "Download Statements", download_mini_statement_transaction_path(current_user.id, format: 'pdf') %></b>
 
   
