@@ -9,8 +9,8 @@
   <p>Thanks for joining us, Have a great day!</p>
 <% end %>
 
-<% if current_user.has_role? :admin %>
-  <h1><strong>Hello Admin</strong></h1>
+<% if current_user.has_role?(:admin) || current_user.has_role?(:manager) %>
+  <h1><strong>Hello</strong></h1>
 
   <table class="table table-striped">
     <thead>
@@ -27,7 +27,7 @@
     </thead>
 
     <tbody>
-    <% User.all.each do |user| %>
+    <% @users.each do |user| %>
       <tr>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
@@ -41,7 +41,7 @@
         <% else %>
           <td>Not Verified</td>
         <% end %>    
-        <td><%= link_to "Click to view"%></td>
+        <td><%= link_to "Click to view", user_path(user) %></td>
       </tr>
     <% end %>
   </tbody>

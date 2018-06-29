@@ -19,7 +19,7 @@ class TransactionsController < ApplicationController
     from_account = current_user.account
     to_account = Account.find_by_account_no(@account_no)
     
-    if beneficiary_exist? && from_account.otp == otp
+    if from_account.otp == otp && amount.to_i < from_account.balance.to_i
       to_account.update_columns(balance: (to_account.balance.to_i + amount.to_i))
       from_account.update_columns(balance: (from_account.balance.to_i - amount.to_i), otp: nil)
       Transaction.create!(account_id: to_account.id, user_id: current_user.id, amount: amount)
@@ -29,7 +29,7 @@ class TransactionsController < ApplicationController
 
       redirect_to transactions_path
     else
-      flash[:notice] = "This account number does not exist in your beneficiary list or invalid otp"
+      flash[:alert] = "Invalid otp or You have not sufficient balance in your account"
       redirect_to new_transaction_path
     end
   end
@@ -58,9 +58,5 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       format.js
     end
-  end
-
-  def beneficiary_exist?
-    current_user.beneficiaries.where(account_no: @account_no).first
   end
 end

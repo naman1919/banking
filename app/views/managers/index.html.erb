@@ -1,0 +1,13 @@
+<table class= "table table-striped">
+  <tr>
+    <th>Bank Name</th>
+    <th>Manager Name</th>
+  </tr>
+  
+  <% @banks.all.each do |bank| %>
+  <tr>
+    <td><%= bank.name %></td>
+    <td><%= bank.manager_name %></td>
+  </tr>
+  <% end %>
+</table>

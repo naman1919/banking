@@ -1,5 +1,5 @@
 <% if @user.verify %>
-  <h2><b>Account Number:<%= @user.account.account_no %></b></h2>
+  <h4><b>Account Number:<%= @user.account.account_no %></b></h4>
 <% end %>
 
 <p>Name:<%= @user.first_name %> <%= @user.last_name %></p>
@@ -40,5 +40,3 @@
   <b>Verified</b><br />
   <b>Verified By:<%= @user.verified_by %></b>
 <% end %>
-
-<%= link_to "Transactions", manager_path(@user) %>
