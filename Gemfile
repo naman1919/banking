@@ -28,6 +28,7 @@ gem 'prawn-table'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'jquery-datatables-rails'
+gem 'devise_invitable'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 

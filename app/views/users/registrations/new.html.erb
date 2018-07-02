@@ -105,7 +105,7 @@
     </div>
   </div>
   <br />
-  
+ <!--  
   <div class="field form-group">
     <%= f.label :password, class: "col-md-4 control-labels" %>
     <% if @minimum_password_length %>
@@ -120,7 +120,7 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
-
+ -->
   <%= f.fields_for :local_address, LocalAddress.new do |lform| %>
   <hr>
   <h5><b>Local Address</b></h5>

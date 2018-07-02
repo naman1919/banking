@@ -3,8 +3,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :timeoutable
+         :recoverable, :rememberable, :trackable,
+         :timeoutable, :invitable
 
   mount_uploader :document, ImageUploader
   mount_uploader :user_photo, ImageUploader
@@ -23,7 +23,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :local_address
   accepts_nested_attributes_for :permanent_address
 
-  after_create :assign_default_role, :generate_account_no
+  after_create :assign_default_role, :send_password_link, :generate_account_no 
 
   def assign_default_role
     self.add_role(:user) if self.roles.blank?
@@ -31,5 +31,9 @@ class User < ApplicationRecord
 
   def generate_account_no
     Account.create!(account_no: (SecureRandom.random_number(9e11) + 1e11).to_i, user_id: self.id)
+  end
+
+  def send_password_link
+    self.send_reset_password_instructions
   end
 end
