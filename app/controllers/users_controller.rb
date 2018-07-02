@@ -18,6 +18,6 @@ class UsersController < ApplicationController
     
     UserMailer.verify_user(@user).deliver
 
-    redirect_to welcome_index_path
+    redirect_to users_path
   end 
 end

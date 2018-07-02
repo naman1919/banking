@@ -21,4 +21,3 @@ class ManagersController < ApplicationController
     end
   end
 end
-

@@ -31,7 +31,7 @@ class TransactionPdf < Prawn::Document
         account_no(transaction.account, transaction.user.account),
         transaction.amount,
         transaction.created_at.strftime("%d-%m-%Y --%H-%M-%S"),
-        transaction_type(transaction.account, transaction.user.account)
+        transaction_type(transaction.account)
       ]
     end
   end
@@ -44,11 +44,11 @@ class TransactionPdf < Prawn::Document
     end
   end
 
-  def transaction_type(from_account, to_account)
+  def transaction_type(to_account)
     if to_account.id == @user.account.id
-      'DEBIT'
-    else
       'CREDIT'
+    else
+      'DEBIT'
     end
   end
 

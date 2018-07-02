@@ -37,6 +37,6 @@
 <% if !@user.verify %>
   <%= link_to "Verify", verify_user_path(@user), class: "btn btn-success" %>
 <% else %>
-  <b>Verified</b><br />
+  <b>Status: Verified</b><br />
   <b>Verified By:<%= @user.verified_by %></b>
 <% end %>

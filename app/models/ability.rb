@@ -6,11 +6,13 @@ class Ability
     #
     #   user ||= User.new # guest user (not logged in)
     if user.has_role? :admin
-       can :verify, User
+      can [:verify, :read], User
     elsif user.has_role? :user
-       can :create, Account
-       can [:create, :read], Beneficiary
-       can [:create, :read], Transaction
+      can :create, Account
+      can [:create, :read], Beneficiary
+      can [:create, :read], Transaction
+    elsif user.has_role? :manager
+      can [:verify, :read], User   
     end
           
     #   else

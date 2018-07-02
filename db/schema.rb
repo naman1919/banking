@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_29_112412) do
+ActiveRecord::Schema.define(version: 2018_07_02_091350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,7 +96,6 @@ ActiveRecord::Schema.define(version: 2018_06_29_112412) do
     t.string "occupation"
     t.string "father_occupation"
     t.string "mother_occupation"
-    t.integer "mobile_no"
     t.string "social_security_no"
     t.string "pan"
     t.string "document"
@@ -107,6 +106,7 @@ ActiveRecord::Schema.define(version: 2018_06_29_112412) do
     t.datetime "confirmation_sent_at"
     t.boolean "verify"
     t.string "verified_by"
+    t.bigint "mobile_no"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
